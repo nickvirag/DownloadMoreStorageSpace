@@ -4,7 +4,7 @@
   "description": "Download more storage space for your personal computer.",
   "main": "src/index.js",
   "scripts": {
-    "main": "node src/index.js",
+    "main": "node -r esm src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/nickvirag/DownloadMoreStorageSpace/issues"
   },
-  "homepage": "https://github.com/nickvirag/DownloadMoreStorageSpace#readme"
+  "homepage": "https://github.com/nickvirag/DownloadMoreStorageSpace#readme",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.1",
+    "eslint-plugin-node": "^10.0.0"
+  }
 }
