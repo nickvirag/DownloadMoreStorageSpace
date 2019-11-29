@@ -1,0 +1,20 @@
+{
+  "name": "download-more-storage-space",
+  "version": "1.0.0",
+  "description": "Download more storage space for your personal computer.",
+  "main": "src/index.js",
+  "scripts": {
+    "main": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickvirag/DownloadMoreStorageSpace.git"
+  },
+  "author": "Nick Virag",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nickvirag/DownloadMoreStorageSpace/issues"
+  },
+  "homepage": "https://github.com/nickvirag/DownloadMoreStorageSpace#readme"
+}
