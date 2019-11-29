@@ -8,6 +8,6 @@ import { promisify } from 'util';
  * @param  {string}  sourcePath       Source path
  * @param  {string}  destinationPath  Destination path
  */
-export const extract = async (sourcePath, destinationPath) => {
+export const expand = async (sourcePath, destinationPath) => {
 
 };

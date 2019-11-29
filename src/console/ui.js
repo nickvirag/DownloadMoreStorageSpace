@@ -1,16 +1,17 @@
 import { supportedArgs, processArgs } from './args.js';
 import { prompt } from './readline.js';
-import { compress, extract } from '../lib/index.js';
+import { compress, expand } from '../lib/index.js';
 import { createDefaultOutputFilepath } from '../util/index.js';
+import { errorMessages } from '../constants/index.js';
 
 export const runUI = async () => {
-  console.log('Welcome to the storage(📂) space(🌟) creator(‼️)');
+  console.log('Welcome to the storage space creator 📂💫😎');
 
   const args = processArgs();
 
   if (args.help) {
     console.log(
-      'Usage:\n\tnpm run main -- [input] [output] [--compress|--extract] [--help]\n',
+      'Usage:\n\tnpm run main -- [input] [output] [--compress|--expand] [--help]\n',
     );
     console.log('Arguments:');
     supportedArgs.forEach(({ args, description }) => {
@@ -20,15 +21,15 @@ export const runUI = async () => {
     return;
   }
 
-  if (args.compress && args.extract) {
-    throw new Error('🤫');
+  if (args.compress && args.expand) {
+    throw new Error(errorMessages.conflictingArgs);
   }
 
-  if (!args.compress && !args.extract) {
-    throw new Error('🤔');
+  if (!args.compress && !args.expand) {
+    throw new Error(errorMessages.missingArgs);
   }
 
-  const mode = args.compress ? 'compress' : 'extract';
+  const mode = args.compress ? 'compress' : 'expand';
 
   let inputFilepath = args.inputFilepath;
   while (!inputFilepath) {
@@ -41,6 +42,6 @@ export const runUI = async () => {
   if (mode === 'compress') {
     await compress(inputFilepath, outputFilepath);
   } else {
-    await extract(inputFilepath, outputFilepath);
+    await expand(inputFilepath, outputFilepath);
   }
 };

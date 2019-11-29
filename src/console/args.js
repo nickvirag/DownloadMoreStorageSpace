@@ -10,8 +10,8 @@ export const supportedArgs = [
     description: 'Compress input filepath',
   },
   {
-    args: ['-e', '--extract'],
-    description: 'Extract input filepath',
+    args: ['-e', '--expand'],
+    description: 'Expand input filepath',
   },
   {
     args: ['-i=', '--input='],
@@ -43,11 +43,11 @@ export const processArgs = () => {
 
   const compress = args.c || args.compress || false;
 
-  const extract = args.e || args.extract || false;
+  const expand = args.e || args.expand || false;
 
   const options = {
     compress,
-    extract,
+    expand,
     inputFilepath,
     help,
     outputFilepath,
