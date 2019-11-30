@@ -1,3 +1,5 @@
+import path from 'path';
+
 import { supportedArgs, processArgs } from './args.js';
 import { prompt } from './readline.js';
 import { compress, expand } from '../api/index.js';
@@ -10,7 +12,13 @@ import { errorMessages } from '../constants/index.js';
  * @return  {string}                 Default output filepath
  */
 const createDefaultOutputFilepath = (inputFilepath, mode) => {
+  const filepath = path.dirname(inputFilepath);
+  const filename =
+    `${path.basename(inputFilepath)}_${
+      mode === 'compress' ? 'compressed' : 'expanded'
+    }`;
 
+  return path.join(filepath, filename);
 }
 
 export const runUI = async () => {
@@ -61,12 +69,14 @@ export const runUI = async () => {
   }
 
   if (mode === 'compress') {
+    console.log(`Compressing ${inputFilepath} to ${outputFilepath}`);
     await compress(
       inputFilepath,
       outputFilepath,
       { shouldOverwriteOutput: true },
     );
   } else {
+    console.log(`Expanding ${inputFilepath} to ${outputFilepath}`);
     await expand(
       inputFilepath,
       outputFilepath,

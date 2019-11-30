@@ -1,2 +1,2 @@
-export * from './base64Conversion.js';
+export * from './bufferConversion.js';
 export * from './storageSpaceCreation.js';

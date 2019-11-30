@@ -3,7 +3,7 @@ import tmp from 'tmp';
 import { promisify } from 'util';
 
 import { unzip, zip } from '../util/index.js';
-import { base64ToFilepaths, filepathsToBase64 } from './base64Conversion.js';
+import { bufferToFilepaths, filepathsToBuffer } from './bufferConversion.js';
 
 /**
  * Expand a file or folder.
@@ -18,12 +18,11 @@ export const expand = async (
 ) => {
   const shouldOverwriteOutput = options.shouldOverwriteOutput || false;
 
+  const filepaths = await promisify(fs.readdir)(sourcePath);
+  const buffer = filepathsToBuffer(filepaths);
+
   const unzipDestinationPath = await promisify(tmp.dir);
-  await unzip(sourcePath, unzipDestinationPath);
-
-  const filepaths = await promisify(fs.readdir)(unzipDestinationPath);
-
-  const base64 = filepathsToBase64(filepaths);
+  await unzip(buffer, unzipDestinationPath);
 };
 
 /**
@@ -38,10 +37,8 @@ export const compress = async (
   options={ shouldOverwriteOutput: false },
 ) => {
   const shouldOverwriteOutput = options.shouldOverwriteOutput || false;
-  
+
   const buffer = await zip(sourcePath);
-  const base64 = buffer.toString('base64');
-  const filepaths = base64ToFilepaths(base64);
-  
+  const filepaths = bufferToFilepaths(buffer);
   console.log(filepaths);
 };

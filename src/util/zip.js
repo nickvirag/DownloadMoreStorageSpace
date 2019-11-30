@@ -1,5 +1,6 @@
 import AdmZip from 'adm-zip';
 import fs from 'fs';
+import tmp from 'tmp-promise';
 import { promisify } from 'util';
 
 import { errorMessages } from '../constants/index.js';
@@ -32,24 +33,23 @@ export const zip = async (path) => {
 };
 
 export const unzip = async (
-  path,
+  buffer,
   destinationPath,
   options={ shouldOverwrite: false },
 ) => {
   const shouldOverwrite = options.shouldOverwrite || false;
 
-  const admZip = new AdmZip(path);
+  const {
+    path: zipFilepath,
+    cleanup,
+  } = await tmp.file();
 
-  admZip.extractAllTo(destinationPath, shouldOverwrite);
-
-  let stat;
   try {
-    stat = await promisify(fs.stat)(sourcePath);
-  } catch (e) {
-    if (e.code === 'ENOENT') {
-      throw new Error(errorMessages.fileNotFound);
-    }
+    await promisify(fs.write)(zipFilepath, buffer, 0, buffer.length);
 
-    throw e;
+    const admZip = new AdmZip(path);
+    admZip.extractAllTo(destinationPath, shouldOverwrite);
+  } finally {
+    cleanup();
   }
 };
