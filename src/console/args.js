@@ -21,11 +21,16 @@ export const supportedArgs = [
     args: ['-o=', '--output='],
     description: 'Output filepath',
   },
+  {
+    args: ['-r', '--replace'],
+    description: 'Overwrite output if exists',
+  },
 ];
 
 export const processArgs = () => {
   const args = minimist(process.argv);
 
+  console.log(args);
   // Remove node and module path from unnamed args
   const unnamedArgs = args._.splice(2);
 
@@ -45,12 +50,15 @@ export const processArgs = () => {
 
   const expand = args.e || args.expand || false;
 
+  const overwriteOutput = args.r || args.replace || false;
+
   const options = {
     compress,
     expand,
     inputFilepath,
     help,
     outputFilepath,
+    overwriteOutput,
   };
 
   return options;

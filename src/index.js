@@ -1,5 +1,4 @@
-export * from './console/index.js';
-export * from './lib/index.js';
+export * from './api/index.js';
 
 import { runUI } from './console/index.js';
 

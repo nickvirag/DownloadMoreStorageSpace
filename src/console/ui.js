@@ -1,8 +1,17 @@
 import { supportedArgs, processArgs } from './args.js';
 import { prompt } from './readline.js';
-import { compress, expand } from '../lib/index.js';
-import { createDefaultOutputFilepath } from '../util/index.js';
+import { compress, expand } from '../api/index.js';
 import { errorMessages } from '../constants/index.js';
+
+/**
+ * Create a default output filepath from an input filepath.
+ *
+ * @param   {string}  inputFilepath  Input filepath
+ * @return  {string}                 Default output filepath
+ */
+const createDefaultOutputFilepath = (inputFilepath, mode) => {
+
+}
 
 export const runUI = async () => {
   console.log('Welcome to the storage space creator 📂💫😎');
@@ -39,9 +48,29 @@ export const runUI = async () => {
   let outputFilepath =
     args.outputFilepath || createDefaultOutputFilepath(inputFilepath, mode);
 
+  if (!args.overwriteOutput) {
+    const isOutputExists = await promisify(fs.access)(outputFilepath);
+    if (isOutputExists) {
+      const shouldOverwriteOutputUserInput = await prompt(
+        `Output filepath ${outputFilepath} exists. Overwrite file? [y/n]: `,
+      );
+      if (shouldOverwriteOutputUserInput.toLowerCase() !== 'y') {
+        throw new Error(errorMessages.cannotOverwriteOutputFilepath);
+      }
+    }
+  }
+
   if (mode === 'compress') {
-    await compress(inputFilepath, outputFilepath);
+    await compress(
+      inputFilepath,
+      outputFilepath,
+      { shouldOverwriteOutput: true },
+    );
   } else {
-    await expand(inputFilepath, outputFilepath);
+    await expand(
+      inputFilepath,
+      outputFilepath,
+      { shouldOverwriteOutput: true },
+    );
   }
 };

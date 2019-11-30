@@ -3,4 +3,5 @@ export const errorMessages = {
   missingArgs: '🤔',
   fileNotFound: '🤲',
   pathNotFileOrDirectory: '🤯',
+  cannotOverwriteOutputFilepath: '🙅‍♀️',
 };
