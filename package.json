@@ -2,8 +2,9 @@
   "name": "download-more-storage-space",
   "version": "1.0.0",
   "description": "Download more storage space for your personal computer.",
-  "main": "src/index.js",
+  "main": "dist/bundle.js",
   "scripts": {
+    "build": "webpack",
     "main": "node -r esm src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +25,17 @@
     "tmp-promise": "^2.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.7.1",
-    "eslint-plugin-node": "^10.0.0"
+    "eslint-plugin-node": "^10.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
