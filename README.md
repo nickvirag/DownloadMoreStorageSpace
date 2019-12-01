@@ -13,7 +13,7 @@ Create more storage space for your personal computer.
 
 ## About
 
-Storage Space Creator 📂💫😎 uses an innovative compression pattern to achieve a perfect 100% compression ratio. Using Storage Space Creator 📂💫😎, we can achieve infinite storage on exactly every storage volume in existence. Also, P=NP.
+Storage Space Creator uses an innovative compression pattern to achieve a perfect 100% compression ratio. Using Storage Space Creator, we can achieve infinite storage on exactly every storage volume in existence. Also, P=NP.
 
 Before compression:
 
@@ -23,9 +23,9 @@ After compression:
 
 ![after compression](doc/after.png)
 
-Storage Space Creator 📂💫😎 uses an innovative emoji system for displaying errors and indexing files. If you don't like emojis, find another solution for creating storage space 😡
+Storage Space Creator uses an innovative emoji system for displaying errors and indexing files. If you don't like emojis, find another solution for creating storage space 😡
 
-⚠️ Please read the [FAQ's](#frequently-asked-questions) for more information ⚠️
+Please read the [FAQ's](#frequently-asked-questions) for more information.
 
 ## Installation
 
@@ -43,7 +43,7 @@ $ git clone https://github.com/nickvirag/DownloadMoreStorageSpace.git
 
 ## Usage: Console
 
-Storage Space Creator 📂💫😎 can be run directly from the console.
+Storage Space Creator can be run directly from the console.
 
 Supported args:
 
@@ -68,7 +68,7 @@ $ npm run main -- -i=path/to/input -o=path/to/output -e
 
 ## Usage: API
 
-Storage Space Creator 📂💫😎 can be integrated with your own Node.js package.
+Storage Space Creator can be integrated with your own Node.js package.
 
 Four methods are provided. Detailed error reporting is available further below.
 
@@ -86,7 +86,7 @@ const {
 ```
 async function compress(sourcePath, destinationPath, options={ shouldOverwriteOutput: false })
 ```
-Compress a source using the Storage Space Creator 📂💫😎 compression algorithm.
+Compress a source using the Storage Space Creator compression algorithm.
 
 Example:
 ```
@@ -101,7 +101,7 @@ await compress(
 ```
 async function expand(sourcePath, destinationPath, options={ shouldOverwriteOutput: false })
 ```
-Expand a source that has been compressed using the Storage Space Creator 📂💫😎 compression algorithm.
+Expand a source that has been compressed using the Storage Space Creator compression algorithm.
 
 Example:
 ```
@@ -116,7 +116,7 @@ await expand(
 ```
 function bufferToFilenames(buffer)
 ```
-Convert a buffer to a list of filenames that will be created by Storage Space Creator 📂💫😎. Unlike `compress`, this does not write the files to the user's hard drive.
+Convert a buffer to a list of filenames that will be created by Storage Space Creator. Unlike `compress`, this does not write the files to the user's hard drive.
 
 Example:
 ```
@@ -128,7 +128,7 @@ const filepaths = bufferToFilenames(buffer);
 ```
 function filenamesToBuffer(buffer)
 ```
-Convert a list of filepaths that have been defined by Storage Space Creator 📂💫😎's `bufferToFilenames` or `compress` methods into a buffer. Unlike `expand`, this does not write the output to the user's hard drive.
+Convert a list of filepaths that have been defined by Storage Space Creator's `bufferToFilenames` or `compress` methods into a buffer. Unlike `expand`, this does not write the output to the user's hard drive.
 
 Example:
 ```
@@ -161,7 +161,9 @@ These emoji are sufficiently self-descriptive, so no further error message docum
 ## Frequently Asked Questions
 
 ### How does it work?
-macOS doesn't include filenames when calculating folder size, so we can create an "empty" folder full of data by creating empty files and encoding data in the filenames.
+macOS doesn't include filenames when calculating folder size.
+
+This program encodes files or directories in base32 and writes the base32 to filenames (the files themselves will be empty), thus giving the illusion of no storage space usage.
 
 ### Why did you do this?
 I don't know. I'm sorry.
@@ -170,7 +172,7 @@ I don't know. I'm sorry.
 I have a Windows computer, but I've decided not to test this code on it.
 
 ### What's the largest filesize that this supports?
-This loads the entire file or directory into memory when encoding and decoding, so it probably doesn't support very big files.
+This loads the entire file or directory into memory when encoding and decoding, so it probably doesn't support very big files. I would love to add stream support (see [TODO](#todo)) so large file support may be added soon.
 
 ## Authors
 
