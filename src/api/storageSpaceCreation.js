@@ -40,5 +40,13 @@ export const compress = async (
 
   const buffer = await zip(sourcePath);
   const filepaths = bufferToFilepaths(buffer);
-  console.log(filepaths);
+  
+  await promisify(fs.mkdir)(destinationPath);
+
+  for (let i = 0; i < filepaths.length; i += 1) {
+    const filepath = filepaths[i];
+    const descriptor =
+      await promisify(fs.open)(path.join(destinationPath, filepath), 'w');
+    await promisify(fs.close)(descriptor);
+  }
 };
