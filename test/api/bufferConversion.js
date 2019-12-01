@@ -1,8 +1,8 @@
 const assert = require('assert');
 
 const {
-  bufferToFilepaths,
-  filepathsToBuffer,
+  bufferToFilenames,
+  filenamesToBuffer,
 } = require('../../dist/bundle.js');
 
 // Lorem ipsum text converted to base64. Text from https://en.wikipedia.org/wiki/Lorem_ipsum
@@ -44,17 +44,17 @@ const loremIpsumFilepaths = [
 ];
 
 describe('Buffer conversion', () => {
-  describe('bufferToFilepaths()', () => {
+  describe('bufferToFilenames()', () => {
     it('should return an array of filepaths for a buffer', () => {
       const buffer = Buffer.from(loremIpsumBase64, 'base64');
-      const filepaths = bufferToFilepaths(buffer);
+      const filepaths = bufferToFilenames(buffer);
       assert.deepEqual(filepaths, loremIpsumFilepaths);
     });
   });
 
-  describe('filepathsToBuffer()', () => {
+  describe('filenamesToBuffer()', () => {
     it('should return a buffer for an array of filepaths', () => {
-      const buffer = filepathsToBuffer(loremIpsumFilepaths);
+      const buffer = filenamesToBuffer(loremIpsumFilepaths);
       assert.equal(buffer.toString('base64'), loremIpsumBase64);
     });
   });

@@ -76,8 +76,8 @@ Four methods are provided. Detailed error reporting is available further below.
 const {
   compress,
   expand,
-  bufferToFilepaths,
-  filepathsToBuffer,
+  bufferToFilenames,
+  filenamesToBuffer,
   errorMessages,
 } = require('storage-space-creator');
 ```
@@ -112,28 +112,28 @@ await expand(
 );
 ```
 
-### bufferToFilepaths()
+### bufferToFilenames()
 ```
-function bufferToFilepaths(buffer)
+function bufferToFilenames(buffer)
 ```
-Convert a buffer to a list of filepaths that will be created by Storage Space Creator 📂💫😎. Unlike `compress`, this does not create an output file on the user's hard drive.
+Convert a buffer to a list of filenames that will be created by Storage Space Creator 📂💫😎. Unlike `compress`, this does not write the files to the user's hard drive.
 
 Example:
 ```
 const buffer = Buffer.from(...);
-const filepaths = await bufferToFilepaths(buffer);
+const filepaths = bufferToFilenames(buffer);
 ```
 
-### filepathsToBuffer()
+### filenamesToBuffer()
 ```
-function filepathsToBuffer(buffer)
+function filenamesToBuffer(buffer)
 ```
-Convert a list of filepaths that have been defined by Storage Space Creator 📂💫😎's `bufferToFilepaths` or `compress` methods into a buffer. Unlike `expand`, this does not create an output file on the user's hard drive.
+Convert a list of filepaths that have been defined by Storage Space Creator 📂💫😎's `bufferToFilenames` or `compress` methods into a buffer. Unlike `expand`, this does not write the output to the user's hard drive.
 
 Example:
 ```
 const filepaths = [...];
-const buffer = await filepathsToBuffer(filepaths);
+const buffer = filenamesToBuffer(filepaths);
 ```
 
 ### errorMessages

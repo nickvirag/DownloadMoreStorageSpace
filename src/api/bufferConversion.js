@@ -17,7 +17,7 @@ const filenameRegex = new RegExp(
  * @param   {object}    buffer  Buffer
  * @return  {[string]}          Filenames
  */
-export const bufferToFilepaths = (buffer) => {
+export const bufferToFilenames = (buffer) => {
   const filepaths = [];
 
   let base64String = buffer.toString('base64');
@@ -41,7 +41,7 @@ export const bufferToFilepaths = (buffer) => {
  * @param   {[string]}  filepaths  Filepaths
  * @return  {object}    buffer     Buffer
  */
-export const filepathsToBuffer = (filepaths) => {
+export const filenamesToBuffer = (filepaths) => {
   const base32Array = [];
 
   filepaths.forEach((filepath) => {

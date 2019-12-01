@@ -4,7 +4,7 @@ import rimraf from 'rimraf';
 import { promisify } from 'util';
 
 import { isAccessible, unzip, zip } from '../util/index.js';
-import { bufferToFilepaths, filepathsToBuffer } from './bufferConversion.js';
+import { bufferToFilenames, filenamesToBuffer } from './bufferConversion.js';
 
 /**
  * Expand a file or folder.
@@ -20,7 +20,7 @@ export const expand = async (
   const shouldOverwriteOutput = options.shouldOverwriteOutput || false;
 
   const filepaths = await promisify(fs.readdir)(sourcePath);
-  const buffer = filepathsToBuffer(filepaths);
+  const buffer = filenamesToBuffer(filepaths);
   await unzip(buffer, destinationPath, { shouldOverwriteOutput });
 };
 
@@ -38,7 +38,7 @@ export const compress = async (
   const shouldOverwriteOutput = options.shouldOverwriteOutput || false;
 
   const buffer = await zip(sourcePath);
-  const filepaths = bufferToFilepaths(buffer);
+  const filepaths = bufferToFilenames(buffer);
   
   const isDestinationAccessible = await isAccessible(destinationPath);
   if (isDestinationAccessible) {
