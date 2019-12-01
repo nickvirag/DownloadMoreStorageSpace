@@ -1,6 +1,6 @@
 {
   "name": "storage-space-creator",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Download more storage space for your personal computer.",
   "main": "dist/bundle.js",
   "scripts": {
