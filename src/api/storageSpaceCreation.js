@@ -1,8 +1,9 @@
 import fs from 'fs';
-import tmp from 'tmp';
+import path from 'path';
+import rimraf from 'rimraf';
 import { promisify } from 'util';
 
-import { unzip, zip } from '../util/index.js';
+import { isAccessible, unzip, zip } from '../util/index.js';
 import { bufferToFilepaths, filepathsToBuffer } from './bufferConversion.js';
 
 /**
@@ -20,9 +21,7 @@ export const expand = async (
 
   const filepaths = await promisify(fs.readdir)(sourcePath);
   const buffer = filepathsToBuffer(filepaths);
-
-  const unzipDestinationPath = await promisify(tmp.dir);
-  await unzip(buffer, unzipDestinationPath);
+  await unzip(buffer, destinationPath, { shouldOverwriteOutput });
 };
 
 /**
@@ -41,6 +40,13 @@ export const compress = async (
   const buffer = await zip(sourcePath);
   const filepaths = bufferToFilepaths(buffer);
   
+  const isDestinationAccessible = await isAccessible(destinationPath);
+  if (isDestinationAccessible) {
+    if (shouldOverwriteOutput) {
+      await promisify(rimraf)(destinationPath);
+    }
+  }
+
   await promisify(fs.mkdir)(destinationPath);
 
   for (let i = 0; i < filepaths.length; i += 1) {

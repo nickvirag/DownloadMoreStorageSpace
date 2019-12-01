@@ -30,7 +30,6 @@ export const supportedArgs = [
 export const processArgs = () => {
   const args = minimist(process.argv);
 
-  console.log(args);
   // Remove node and module path from unnamed args
   const unnamedArgs = args._.splice(2);
 

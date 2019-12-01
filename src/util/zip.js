@@ -35,9 +35,9 @@ export const zip = async (path) => {
 export const unzip = async (
   buffer,
   destinationPath,
-  options={ shouldOverwrite: false },
+  options={ shouldOverwriteOutput: false },
 ) => {
-  const shouldOverwrite = options.shouldOverwrite || false;
+  const shouldOverwriteOutput = options.shouldOverwriteOutput || false;
 
   const {
     path: zipFilepath,
@@ -45,10 +45,12 @@ export const unzip = async (
   } = await tmp.file();
 
   try {
-    await promisify(fs.write)(zipFilepath, buffer, 0, buffer.length);
+    const descriptor = await promisify(fs.open)(zipFilepath, 'w');
+    await promisify(fs.write)(descriptor, buffer, 0, buffer.length);
+    await promisify(fs.close)(descriptor);
 
     const admZip = new AdmZip(zipFilepath);
-    admZip.extractAllTo(destinationPath, shouldOverwrite);
+    admZip.extractAllTo(destinationPath, shouldOverwriteOutput);
   } finally {
     cleanup();
   }
