@@ -1,4 +1,6 @@
+import fs from 'fs';
 import path from 'path';
+import { promisify } from 'util';
 
 import { supportedArgs, processArgs } from './args.js';
 import { prompt } from './readline.js';

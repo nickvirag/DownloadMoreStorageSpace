@@ -4,7 +4,9 @@
   "description": "Download more storage space for your personal computer.",
   "main": "dist/bundle.js",
   "scripts": {
-    "build": "webpack",
+    "build": "npm run eslint && webpack",
+    "build-no-eslint": "webpack",
+    "eslint": "eslint src",
     "main": "node -r esm src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -47,7 +47,7 @@ export const unzip = async (
   try {
     await promisify(fs.write)(zipFilepath, buffer, 0, buffer.length);
 
-    const admZip = new AdmZip(path);
+    const admZip = new AdmZip(zipFilepath);
     admZip.extractAllTo(destinationPath, shouldOverwrite);
   } finally {
     cleanup();
